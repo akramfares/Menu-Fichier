@@ -55,7 +55,7 @@ public class application extends javax.swing.JFrame {
 
         jTextPane1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jTextPane1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
-        jTextPane1.setText("Titre");
+        jTextPane1.setText("Introdution");
         jScrollPane1.setViewportView(jTextPane1);
 
         jMenu1.setBackground(new java.awt.Color(0, 0, 0));
