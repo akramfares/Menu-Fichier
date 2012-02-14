@@ -88,7 +88,6 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Shift+Ctrl+S"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Enregestrer Sous"/>
                 <Property name="text" type="java.lang.String" value="Enregistrer-sous"/>
               </Properties>
             </MenuItem>
@@ -148,7 +147,6 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="458" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane2" alignment="0" min="-2" pref="389" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" alignment="0" min="-2" pref="458" max="-2" attributes="0"/>
@@ -162,7 +160,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="397" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="176" max="-2" attributes="0"/>
               <EmptySpace pref="203" max="32767" attributes="0"/>
