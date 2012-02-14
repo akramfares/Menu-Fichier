@@ -10,15 +10,30 @@
  */
 package menu;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import javax.swing.JFileChooser;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
+
 /**
  *
  * @author khalid
  */
+
 public class application extends javax.swing.JFrame {
+    Element titre = new Element("titre");
+    Element intro = new Element("introduction");
 
     /** Creates new form application */
     public application() {
         initComponents();
+        
+        racine.addContent(titre);
+        
+        racine.addContent(intro);
     }
 
     /** This method is called from within the constructor to
@@ -32,6 +47,8 @@ public class application extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -44,6 +61,7 @@ public class application extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -56,7 +74,25 @@ public class application extends javax.swing.JFrame {
         jTextPane1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jTextPane1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jTextPane1.setText("Introdution");
+        jTextPane1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextPane1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextPane1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPane1KeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextPane1);
+
+        jTextPane2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextPane2KeyPressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTextPane2);
 
         jMenu1.setBackground(new java.awt.Color(0, 0, 0));
         jMenu1.setText("File");
@@ -93,10 +129,20 @@ public class application extends javax.swing.JFrame {
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setBackground(new java.awt.Color(51, 51, 51));
         jMenuItem3.setText("Ouvrir      ");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem4.setText("Enregistrer");
+        jMenu1.add(jMenuItem4);
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem7.setText("Enregestrer Sous");
+        jMenuItem7.setText("Enregistrer-sous");
         jMenu1.add(jMenuItem7);
 
         jMenu4.setText("Imprimer");
@@ -126,6 +172,9 @@ public class application extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(171, 171, 171)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(238, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,15 +182,55 @@ public class application extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(397, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    ouvrirFichier();
+}//GEN-LAST:event_jMenuItem3ActionPerformed
+
+private void jTextPane1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyPressed
+                  
+      
+}//GEN-LAST:event_jTextPane1KeyPressed
+
+private void jTextPane2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane2KeyPressed
+      intro.setText(jTextPane2.getText());
+      enregistre("Exercice1.xml");
+}//GEN-LAST:event_jTextPane2KeyPressed
+
+private void jTextPane1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyTyped
+
+}//GEN-LAST:event_jTextPane1KeyTyped
+
+private void jTextPane1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyReleased
+      titre.setText(jTextPane1.getText());
+      enregistre("Exercice1.xml");
+}//GEN-LAST:event_jTextPane1KeyReleased
+
+private void ouvrirFichier() {
+      JFileChooser jfc = new JFileChooser();
+
+      int resultat = jfc.showOpenDialog(this);
+      if (resultat == JFileChooser.APPROVE_OPTION) {
+            File fichierCourant = jfc.getSelectedFile();
+            fichierCourant.getAbsolutePath();
+            //lireFichier(fichierCourant);
+      }
+      else {
+         //fichierCourant = null;
+      }
+   }
+
     /**
      * @param args the command line arguments
      */
+    static Element racine = new Element("cours");
+
+   //On crée un nouveau Document JDOM basé sur la racine que l'on vient de créer
+   static org.jdom.Document document = new Document(racine);
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -165,7 +254,7 @@ public class application extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -174,6 +263,31 @@ public class application extends javax.swing.JFrame {
             }
         });
     }
+    
+    static void affiche()
+{
+   try
+   {
+      //On utilise ici un affichage classique avec getPrettyFormat()
+      XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+      sortie.output(document, System.out);
+   }
+   catch (java.io.IOException e){}
+}
+
+static void enregistre(String fichier)
+{
+   try
+   {
+      //On utilise ici un affichage classique avec getPrettyFormat()
+      XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+      //Remarquez qu'il suffit simplement de créer une instance de FileOutputStream
+      //avec en argument le nom du fichier pour effectuer la sérialisation.
+      sortie.output(document, new FileOutputStream(fichier));
+   }
+   catch (java.io.IOException e){}
+}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -188,12 +302,15 @@ public class application extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPane2;
     // End of variables declaration//GEN-END:variables
 }
