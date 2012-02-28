@@ -11,12 +11,7 @@
 package menu;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import javax.swing.JFileChooser;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
 
 /**
  *
@@ -24,16 +19,14 @@ import org.jdom.output.XMLOutputter;
  */
 
 public class application extends javax.swing.JFrame {
-    Element titre = new Element("titre");
-    Element intro = new Element("introduction");
+    Fichier f = new Fichier();
 
     /** Creates new form application */
     public application() {
         initComponents();
         
-        racine.addContent(titre);
+        panelCours.setVisible(false);
         
-        racine.addContent(intro);
     }
 
     /** This method is called from within the constructor to
@@ -45,14 +38,17 @@ public class application extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        panelCours = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        coursIntroduction = new javax.swing.JTextPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        coursTitre = new javax.swing.JTextPane();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuNouveauCours = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -60,9 +56,9 @@ public class application extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        menuOuvrir = new javax.swing.JMenuItem();
+        menuEnregistrer = new javax.swing.JMenuItem();
+        menuEnregistrerSous = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -70,37 +66,86 @@ public class application extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
-        jTextPane1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jTextPane1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
-        jTextPane1.setText("Introdution");
-        jTextPane1.addKeyListener(new java.awt.event.KeyAdapter() {
+        coursIntroduction.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextPane1KeyPressed(evt);
+                coursIntroductionKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextPane1KeyReleased(evt);
+                coursIntroductionKeyReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(coursIntroduction);
+
+        coursTitre.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        coursTitre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                coursTitreKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                coursTitreKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextPane1KeyTyped(evt);
+                coursTitreKeyTyped(evt);
             }
         });
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(coursTitre);
 
-        jTextPane2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextPane2KeyPressed(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jTextPane2);
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Titre : ");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Introduction : ");
+
+        javax.swing.GroupLayout panelCoursLayout = new javax.swing.GroupLayout(panelCours);
+        panelCours.setLayout(panelCoursLayout);
+        panelCoursLayout.setHorizontalGroup(
+            panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCoursLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(53, 53, 53)
+                .addGroup(panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        panelCoursLayout.setVerticalGroup(
+            panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCoursLayout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
 
         jMenu1.setBackground(new java.awt.Color(0, 0, 0));
         jMenu1.setText("File");
 
         jMenu3.setText("Nouveau");
 
-        jMenuItem1.setText("cours                                 ");
-        jMenu3.add(jMenuItem1);
+        menuNouveauCours.setText("cours                                 ");
+        menuNouveauCours.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNouveauCoursActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuNouveauCours);
 
         jMenu5.setText("Exercice");
 
@@ -126,23 +171,33 @@ public class application extends javax.swing.JFrame {
 
         jMenu1.add(jMenu3);
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem3.setBackground(new java.awt.Color(51, 51, 51));
-        jMenuItem3.setText("Ouvrir      ");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        menuOuvrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        menuOuvrir.setBackground(new java.awt.Color(51, 51, 51));
+        menuOuvrir.setText("Ouvrir      ");
+        menuOuvrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                menuOuvrirActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMenu1.add(menuOuvrir);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem4.setText("Enregistrer");
-        jMenu1.add(jMenuItem4);
+        menuEnregistrer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        menuEnregistrer.setText("Enregistrer");
+        menuEnregistrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEnregistrerActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuEnregistrer);
 
-        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem7.setText("Enregistrer-sous");
-        jMenu1.add(jMenuItem7);
+        menuEnregistrerSous.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        menuEnregistrerSous.setText("Enregistrer-sous");
+        menuEnregistrerSous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEnregistrerSousActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuEnregistrerSous);
 
         jMenu4.setText("Imprimer");
 
@@ -169,69 +224,74 @@ public class application extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(171, 171, 171)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(panelCours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addComponent(panelCours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-    ouvrirFichier();
-}//GEN-LAST:event_jMenuItem3ActionPerformed
+private void menuOuvrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuOuvrirActionPerformed
+    f.ouvrirFichier(coursTitre, coursIntroduction);
+    panelCours.setVisible(true);
+}//GEN-LAST:event_menuOuvrirActionPerformed
 
-private void jTextPane1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyPressed
+private void coursTitreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coursTitreKeyPressed
                   
       
-}//GEN-LAST:event_jTextPane1KeyPressed
+}//GEN-LAST:event_coursTitreKeyPressed
 
-private void jTextPane2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane2KeyPressed
-      intro.setText(jTextPane2.getText());
-      enregistre("Exercice1.xml");
-}//GEN-LAST:event_jTextPane2KeyPressed
+private void coursIntroductionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coursIntroductionKeyPressed
 
-private void jTextPane1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyTyped
+}//GEN-LAST:event_coursIntroductionKeyPressed
 
-}//GEN-LAST:event_jTextPane1KeyTyped
+private void coursTitreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coursTitreKeyTyped
 
-private void jTextPane1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyReleased
-      titre.setText(jTextPane1.getText());
-      enregistre("Exercice1.xml");
-}//GEN-LAST:event_jTextPane1KeyReleased
+}//GEN-LAST:event_coursTitreKeyTyped
 
-private void ouvrirFichier() {
-      JFileChooser jfc = new JFileChooser();
+private void coursTitreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coursTitreKeyReleased
+    f.setTitre(coursTitre.getText());
+}//GEN-LAST:event_coursTitreKeyReleased
 
-      int resultat = jfc.showOpenDialog(this);
-      if (resultat == JFileChooser.APPROVE_OPTION) {
-            File fichierCourant = jfc.getSelectedFile();
-            fichierCourant.getAbsolutePath();
-            //lireFichier(fichierCourant);
-      }
-      else {
-         //fichierCourant = null;
-      }
-   }
+private void menuNouveauCoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNouveauCoursActionPerformed
+      panelCours.setVisible(true);
+      coursTitre.setText("");
+      coursIntroduction.setText("");
+}//GEN-LAST:event_menuNouveauCoursActionPerformed
+
+private void coursIntroductionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coursIntroductionKeyReleased
+      f.setIntroduction(coursIntroduction.getText());
+}//GEN-LAST:event_coursIntroductionKeyReleased
+
+private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+}//GEN-LAST:event_formWindowClosed
+
+private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+      f.deleteTemp();
+}//GEN-LAST:event_formWindowClosing
+
+private void menuEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEnregistrerActionPerformed
+    f.enregistrerFichier();
+}//GEN-LAST:event_menuEnregistrerActionPerformed
+
+private void menuEnregistrerSousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEnregistrerSousActionPerformed
+    f.enregistrerSousFichier();
+}//GEN-LAST:event_menuEnregistrerSousActionPerformed
+
 
     /**
      * @param args the command line arguments
      */
-    static Element racine = new Element("cours");
+    
 
-   //On crée un nouveau Document JDOM basé sur la racine que l'on vient de créer
-   static org.jdom.Document document = new Document(racine);
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -265,53 +325,35 @@ private void ouvrirFichier() {
         });
     }
     
-    static void affiche()
-{
-   try
-   {
-      //On utilise ici un affichage classique avec getPrettyFormat()
-      XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-      sortie.output(document, System.out);
-   }
-   catch (java.io.IOException e){}
-}
+    
 
-static void enregistre(String fichier)
-{
-   try
-   {
-      //On utilise ici un affichage classique avec getPrettyFormat()
-      XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-      //Remarquez qu'il suffit simplement de créer une instance de FileOutputStream
-      //avec en argument le nom du fichier pour effectuer la sérialisation.
-      sortie.output(document, new FileOutputStream(fichier));
-   }
-   catch (java.io.IOException e){}
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane coursIntroduction;
+    private javax.swing.JTextPane coursTitre;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JMenuItem menuEnregistrer;
+    private javax.swing.JMenuItem menuEnregistrerSous;
+    private javax.swing.JMenuItem menuNouveauCours;
+    private javax.swing.JMenuItem menuOuvrir;
+    private javax.swing.JPanel panelCours;
     // End of variables declaration//GEN-END:variables
 }
