@@ -35,6 +35,11 @@ public class Fichier {
         fichier = String.valueOf(time)+".xml";
         temp = fichier;
     }
+    void init(){
+        long time = new Date().getTime();
+        fichier = String.valueOf(time)+".xml";
+        temp = fichier;
+    }
     
     void setFichier(String f){
         fichier = f;

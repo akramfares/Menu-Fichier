@@ -10,8 +10,14 @@
  */
 package menu;
 
-import java.io.File;
-import javax.swing.JFileChooser;
+
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTextPane;
+import javax.xml.bind.JAXBException;
+import org.docx4j.openpackaging.exceptions.Docx4JException;
+import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 
 /**
  *
@@ -20,12 +26,14 @@ import javax.swing.JFileChooser;
 
 public class application extends javax.swing.JFrame {
     Fichier f = new Fichier();
-
     /** Creates new form application */
     public application() {
         initComponents();
         
+        
+        //scrollIntro.setViewportView(coursIntroduction);
         panelCours.setVisible(false);
+        
         
     }
 
@@ -39,12 +47,12 @@ public class application extends javax.swing.JFrame {
     private void initComponents() {
 
         panelCours = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        coursIntroduction = new javax.swing.JTextPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         coursTitre = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        scrollIntro = new javax.swing.JScrollPane();
+        coursIntroduction = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -59,10 +67,12 @@ public class application extends javax.swing.JFrame {
         menuOuvrir = new javax.swing.JMenuItem();
         menuEnregistrer = new javax.swing.JMenuItem();
         menuEnregistrerSous = new javax.swing.JMenuItem();
+        menuImprimer = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        menuExporter = new javax.swing.JMenuItem();
+        html = new javax.swing.JMenuItem();
+        pdf = new javax.swing.JMenuItem();
+        menuQuitter = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,16 +84,6 @@ public class application extends javax.swing.JFrame {
                 formWindowClosed(evt);
             }
         });
-
-        coursIntroduction.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                coursIntroductionKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                coursIntroductionKeyReleased(evt);
-            }
-        });
-        jScrollPane2.setViewportView(coursIntroduction);
 
         coursTitre.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         coursTitre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -99,39 +99,46 @@ public class application extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(coursTitre);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
         jLabel1.setText("Titre : ");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14));
         jLabel2.setText("Introduction : ");
+
+        coursIntroduction.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                coursIntroductionKeyReleased(evt);
+            }
+        });
+        scrollIntro.setViewportView(coursIntroduction);
 
         javax.swing.GroupLayout panelCoursLayout = new javax.swing.GroupLayout(panelCours);
         panelCours.setLayout(panelCoursLayout);
         panelCoursLayout.setHorizontalGroup(
             panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCoursLayout.createSequentialGroup()
+            .addGroup(panelCoursLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addGap(53, 53, 53)
                 .addGroup(panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
+                    .addComponent(scrollIntro)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         panelCoursLayout.setVerticalGroup(
             panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCoursLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+            .addGroup(panelCoursLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelCoursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addComponent(scrollIntro, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(779, 779, 779))
         );
 
         jMenu1.setBackground(new java.awt.Color(0, 0, 0));
@@ -199,18 +206,44 @@ public class application extends javax.swing.JFrame {
         });
         jMenu1.add(menuEnregistrerSous);
 
-        jMenu4.setText("Imprimer");
+        menuImprimer.setText("Imprimer");
+        menuImprimer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuImprimerActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuImprimer);
 
-        jMenuItem5.setText("Numerique");
-        jMenu4.add(jMenuItem5);
+        jMenu4.setText("Exporter");
 
-        jMenuItem6.setText("Imprimer");
-        jMenu4.add(jMenuItem6);
+        menuExporter.setText("Word");
+        menuExporter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuExporterActionPerformed(evt);
+            }
+        });
+        jMenu4.add(menuExporter);
+
+        html.setText("HTML");
+        html.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                htmlActionPerformed(evt);
+            }
+        });
+        jMenu4.add(html);
+
+        pdf.setText("Pdf");
+        pdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pdfActionPerformed(evt);
+            }
+        });
+        jMenu4.add(pdf);
 
         jMenu1.add(jMenu4);
 
-        jMenuItem8.setText("Quiter");
-        jMenu1.add(jMenuItem8);
+        menuQuitter.setText("Quitter");
+        jMenu1.add(menuQuitter);
 
         jMenuBar1.add(jMenu1);
 
@@ -225,32 +258,28 @@ public class application extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelCours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(panelCours, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelCours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addComponent(panelCours, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 private void menuOuvrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuOuvrirActionPerformed
-    f.ouvrirFichier(coursTitre, coursIntroduction);
     panelCours.setVisible(true);
+    f.ouvrirFichier(coursTitre, coursIntroduction);
 }//GEN-LAST:event_menuOuvrirActionPerformed
 
 private void coursTitreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coursTitreKeyPressed
                   
       
 }//GEN-LAST:event_coursTitreKeyPressed
-
-private void coursIntroductionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coursIntroductionKeyPressed
-
-}//GEN-LAST:event_coursIntroductionKeyPressed
 
 private void coursTitreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coursTitreKeyTyped
 
@@ -261,14 +290,12 @@ private void coursTitreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 }//GEN-LAST:event_coursTitreKeyReleased
 
 private void menuNouveauCoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNouveauCoursActionPerformed
+      f.init();
       panelCours.setVisible(true);
       coursTitre.setText("");
       coursIntroduction.setText("");
+      
 }//GEN-LAST:event_menuNouveauCoursActionPerformed
-
-private void coursIntroductionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coursIntroductionKeyReleased
-      f.setIntroduction(coursIntroduction.getText());
-}//GEN-LAST:event_coursIntroductionKeyReleased
 
 private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
 
@@ -285,6 +312,45 @@ private void menuEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//G
 private void menuEnregistrerSousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEnregistrerSousActionPerformed
     f.enregistrerSousFichier();
 }//GEN-LAST:event_menuEnregistrerSousActionPerformed
+
+private void menuExporterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExporterActionPerformed
+        try {
+            Impression i = new Impression();
+            i.imprimerDocx(coursTitre.getText(), coursIntroduction.getText());
+        } catch (Exception ex) {
+            //Logger.getLogger(application.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+}//GEN-LAST:event_menuExporterActionPerformed
+
+private void coursIntroductionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coursIntroductionKeyReleased
+       f.setIntroduction(coursIntroduction.getText());
+}//GEN-LAST:event_coursIntroductionKeyReleased
+
+private void htmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_htmlActionPerformed
+    try {
+            Impression i = new Impression();
+            i.imprimerHTML(coursTitre.getText(), coursIntroduction.getText());
+        } catch (Exception ex) {
+            //Logger.getLogger(application.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+}//GEN-LAST:event_htmlActionPerformed
+
+private void pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfActionPerformed
+    try {
+            Impression i = new Impression();
+            i.imprimerPdf(coursTitre.getText(), coursIntroduction.getText());
+        } catch (Exception ex) {
+            //Logger.getLogger(application.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+}//GEN-LAST:event_pdfActionPerformed
+
+private void menuImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuImprimerActionPerformed
+        JTextPane txt = new JTextPane();
+        txt.setText(coursTitre.getText()+ coursIntroduction.getText());
+        Impression i = new Impression();
+        i.imprimer(txt);
+}//GEN-LAST:event_menuImprimerActionPerformed
 
 
     /**
@@ -306,13 +372,13 @@ private void menuEnregistrerSousActionPerformed(java.awt.event.ActionEvent evt) 
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         
@@ -331,6 +397,7 @@ private void menuEnregistrerSousActionPerformed(java.awt.event.ActionEvent evt) 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane coursIntroduction;
     private javax.swing.JTextPane coursTitre;
+    private javax.swing.JMenuItem html;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -344,16 +411,17 @@ private void menuEnregistrerSousActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem menuEnregistrer;
     private javax.swing.JMenuItem menuEnregistrerSous;
+    private javax.swing.JMenuItem menuExporter;
+    private javax.swing.JMenuItem menuImprimer;
     private javax.swing.JMenuItem menuNouveauCours;
     private javax.swing.JMenuItem menuOuvrir;
+    private javax.swing.JMenuItem menuQuitter;
     private javax.swing.JPanel panelCours;
+    private javax.swing.JMenuItem pdf;
+    private javax.swing.JScrollPane scrollIntro;
     // End of variables declaration//GEN-END:variables
 }
