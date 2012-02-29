@@ -11,13 +11,9 @@
 package menu;
 
 
-import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextPane;
-import javax.xml.bind.JAXBException;
-import org.docx4j.openpackaging.exceptions.Docx4JException;
-import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 
 /**
  *
@@ -73,9 +69,9 @@ public class application extends javax.swing.JFrame {
         html = new javax.swing.JMenuItem();
         pdf = new javax.swing.JMenuItem();
         menuQuitter = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Editeur Sémantique");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -142,7 +138,7 @@ public class application extends javax.swing.JFrame {
         );
 
         jMenu1.setBackground(new java.awt.Color(0, 0, 0));
-        jMenu1.setText("File");
+        jMenu1.setText("Fichier");
 
         jMenu3.setText("Nouveau");
 
@@ -247,9 +243,6 @@ public class application extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -318,7 +311,7 @@ private void menuExporterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             Impression i = new Impression();
             i.imprimerDocx(coursTitre.getText(), coursIntroduction.getText());
         } catch (Exception ex) {
-            //Logger.getLogger(application.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(application.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
 }//GEN-LAST:event_menuExporterActionPerformed
@@ -332,7 +325,7 @@ private void htmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:ev
             Impression i = new Impression();
             i.imprimerHTML(coursTitre.getText(), coursIntroduction.getText());
         } catch (Exception ex) {
-            //Logger.getLogger(application.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(application.class.getName()).log(Level.SEVERE, null, ex);
         } 
 }//GEN-LAST:event_htmlActionPerformed
 
@@ -341,7 +334,7 @@ private void pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:eve
             Impression i = new Impression();
             i.imprimerPdf(coursTitre.getText(), coursIntroduction.getText());
         } catch (Exception ex) {
-            //Logger.getLogger(application.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(application.class.getName()).log(Level.SEVERE, null, ex);
         } 
 }//GEN-LAST:event_pdfActionPerformed
 
@@ -372,13 +365,13 @@ private void menuImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 }
             }
         } catch (ClassNotFoundException ex) {
-            //java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            //java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            //java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            //java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         
@@ -401,7 +394,6 @@ private void menuImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;

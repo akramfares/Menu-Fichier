@@ -4,19 +4,13 @@
  */
 package menu;
 import PrintUtilities.PrintUtilities;
-import java.awt.Component;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JTextPane;
 import javax.xml.bind.JAXBException;
-import javax.xml.soap.Text;
 import org.docx4j.convert.out.html.AbstractHtmlExporter;
 import org.docx4j.convert.out.html.AbstractHtmlExporter.HtmlSettings;
 import org.docx4j.convert.out.html.HtmlExporterNG2;

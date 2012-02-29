@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<cours>
-  <titre>OpenXML</titre>
-  <introduction>Office Open XML est une norme ISO/IEC (IS 29500) créée par Microsoft, destinée à répondre à la demande d’interopérabilité dans les environnements de bureautique et à concurrencer la solution d’interopérabilité OpenDocument. Ce format (dont les suffixes sont .docx, .xlsx, et .pptx) est utilisé par Microsoft Office 2007 ainsi que par Microsoft Office 2008 pour Mac, en remplacement des précédents formats Microsoft (reconnus à leurs suffixes tels que : .doc, .xls, .ppt), il est toutefois légèrement différent, pour ces versions d'office, de la norme ISO définitive, qui a tenu compte des remarques des membres de l'organisme normalisateur.&#xD;
-En 2010, Microsoft a annoncé que le format OOXML dans sa version norme ISO dans la version suivante, actuellement connue sous le nom de Office 151.&#xD;
-Après avoir fait valider son format comme un standard de l’ECMA, Microsoft a confié à cet organisme le soin de le proposer à la normalisation ISO. Après un premier vote négatif en septembre 2007, la normalisation est votée le 29 mars 2008, ce qui ne manque pas de provoquer une certaine polémique, nourrie par la rivalité entre les partisans des normes OpenDocument (ISO 26300), jugée plus ouverte, et Office Open XML.</introduction>
-</cours>
-
