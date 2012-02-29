@@ -17,17 +17,13 @@ import javax.swing.JTextPane;
 
 /**
  *
- * @author khalid
+ * @author Fares, El Aoula, El Alaoui, Chater
  */
 
 public class application extends javax.swing.JFrame {
     Fichier f = new Fichier();
-    /** Creates new form application */
     public application() {
         initComponents();
-        
-        
-        //scrollIntro.setViewportView(coursIntroduction);
         panelCours.setVisible(false);
         
         

@@ -55,19 +55,18 @@ public class Fichier {
         enregistre();
     }
     
+    // Supprime le fichier temporaire
     void deleteTemp(){
         File file = new File(temp);
         file.delete();
     }
     
+    // Enregistre le fichier au format XML
     private static void enregistre()
     {
        try
        {
-          //On utilise ici un affichage classique avec getPrettyFormat()
           XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-          //Remarquez qu'il suffit simplement de créer une instance de FileOutputStream
-          //avec en argument le nom du fichier pour effectuer la sérialisation.
           FileOutputStream fout = new FileOutputStream(fichier);
           sortie.output(document, fout);
           fout.close();
@@ -75,21 +74,20 @@ public class Fichier {
        catch (java.io.IOException e){}
     }
     
+    // Enregistre un fichier donnée en paramètre au format XML
     private static void enregistre(String fichier)
     {
        try
        {
-          //On utilise ici un affichage classique avec getPrettyFormat()
           XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-          //Remarquez qu'il suffit simplement de créer une instance de FileOutputStream
-          //avec en argument le nom du fichier pour effectuer la sérialisation.
           FileOutputStream fout = new FileOutputStream(fichier);
           sortie.output(document, fout);
           fout.close();
        }
        catch (java.io.IOException e){}
     }
-
+    
+    // Ouvre un fichier
     void ouvrirFichier(JTextPane coursTitre,JTextPane coursIntroduction) {
       JFileChooser jfc = new JFileChooser();
 
@@ -98,7 +96,6 @@ public class Fichier {
             File fichierC = jfc.getSelectedFile();
             fichier = fichierC.getAbsolutePath();
             fichierCourant = true;
-            //On crée une instance de SAXBuilder
               SAXBuilder sxb = new SAXBuilder();
               try
               {
@@ -110,11 +107,9 @@ public class Fichier {
               coursTitre.setText(racineLu.getChild("titre").getText());
               coursIntroduction.setText(racineLu.getChild("introduction").getText());
       }
-      else {
-         //fichierCourant = null;
-      }
    }
     
+    // Enregistre un fichier
    void enregistrerFichier(){
        if(fichierCourant) enregistre();
        else{
@@ -133,6 +128,7 @@ public class Fichier {
        }
    }
    
+   // Enregistre un fichier sous
    void enregistrerSousFichier(){
       JFileChooser jfc = new JFileChooser();
       jfc.setDialogTitle("Enregistrer-Sous");

@@ -28,12 +28,12 @@ public class Impression {
     WordprocessingMLPackage wordMLPackage;
     
     Impression(){}
-    
+    // Impression manuelle
     void imprimer(JTextPane txt){
         
         PrintUtilities.printComponent(txt);
     }
-    
+    // Exporter au format Word
     void imprimerDocx(String titre, String intro) throws InvalidFormatException, Docx4JException, JAXBException{
        
       JFileChooser jfc = new JFileChooser();
@@ -66,6 +66,7 @@ public class Impression {
       
     }
     
+    // Exporter au format HTML
     void imprimerHTML(String titre, String intro) throws FileNotFoundException, Exception{
         JFileChooser jfc = new JFileChooser();
 
@@ -106,6 +107,7 @@ public class Impression {
       
     }
     
+    // Exporter au format Pdf
     void imprimerPdf(String titre, String intro) throws FileNotFoundException, Exception{
         JFileChooser jfc = new JFileChooser();
 
